@@ -4,6 +4,46 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy as sp
 import pandas as pd
+import os
+from PIL import Image
+print(os.listdir("../input"))
+
+mainDIR = os.listdir('../input/chest_xray/chest_xray')
+print(mainDIR)
+
+train_folder='../input/chest_xray/chest_xray/train/'
+val_folder = '../input/'
+test_folder = ''
+
+os.listdir(train_folder)
+train_n = train_folder+'NORMAL/'
+train_p = train_folder+'PNEUMONIA/'
+train_c = train_folder+'CANCER/'
+
+print(len(os.listdir(train_n)))
+rand_norm= np.random.randint(0,len(os.listdir(train_n)))
+norm_pic = os.listdir(train_n)[rand_norm]
+print('normal picture title: ',norm_pic)
+
+norm_pic_address = train_n+norm_pic
+
+rand_p = np.random.randint(0,len(os.listdir(train_p)))
+
+sic_pic =  os.listdir(train_p)[rand_norm]
+sic_address = train_p+sic_pic
+print('pneumonia picture title:', sic_pic)
+
+norm_load = Image.open(norm_pic_address)
+sic_load = Image.open(sic_address)
+
+f = plt.figure(figsize= (10,6))
+a1 = f.add_subplot(1,2,1)
+img_plot = plt.imshow(norm_load)
+a1.set_title('Normal')
+
+a2 = f.add_subplot(1, 2, 2)
+img_plot = plt.imshow(sic_load)
+a2.set_title('Pneumonia')
 
 epoch = 30
 wide = 500
